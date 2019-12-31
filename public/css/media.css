@@ -1,0 +1,31 @@
+@media (max-width: 845px){
+    .header_upper_content{
+        border-bottom: 1px solid #f0f0f0;
+    }
+    .header_lower_content{
+        background-color: #ffffff;
+    }
+    .header_site_menu{
+        display: none;
+    }
+    .navbar-text{
+        display: none;
+    }
+    .header_contact_info_box{
+        display: none;
+    }
+    .mini_menu_button{
+        display: flex;
+    }
+    .mini_phone{
+        display: block;
+    }
+    #identx{
+        display: none;
+    }
+}
+@media (max-width: 600px){
+    .navbar-brand img{
+        display: none;
+    }
+}
