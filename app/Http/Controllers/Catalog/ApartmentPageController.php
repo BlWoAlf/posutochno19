@@ -50,12 +50,27 @@ class ApartmentPageController extends Controller
             ->select('apartments.*')
             ->where('id','=',$id)
             ->first();
+
         $apartment_photos = \DB::table('apartment_photos')
-            ->select('apartment_photos.photo_url', 'apartment_photos.sort')
+            ->select('apartment_photos.photo_url')
             ->where('id_apartment','=',$id)
             ->get();
-        return view('apartment', compact('apartment_data'), compact('apartment_photos
-        '));
+
+        $similar_apartments = \DB::table('apartments')
+            ->select(\DB::raw('`apartments`.`id`, `apartments`.`address`, `apartments`.`price1-2` as "price", `apartments`.`rooms`, `apartments`.`places`, (
+    SELECT `apartment_photos`.`photo_url`
+    FROM `apartment_photos`
+    WHERE `apartment_photos`.`id_apartment` = `apartments`.`id`
+    ORDER BY `apartment_photos`.`sort` DESC
+    LIMIT 1
+) as "photo"
+'))
+            ->where('id','!=',$id)
+            ->inRandomOrder()
+            ->limit(3)
+            ->get();
+
+        return view('apartment', ['apartment_data' => $apartment_data, 'apartment_photos' => $apartment_photos, 'similar_apartments'=>$similar_apartments]);
     }
 
     /**

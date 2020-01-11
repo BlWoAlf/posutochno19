@@ -46,7 +46,7 @@
             </div>
         </div>
     </div>
-    <div class="header_lower_content"> {{-- min-width 845px --}}
+    <div class="header_lower_content">
         <div class="container header_lower_container">
             <div class="header_site_menu unselectable">
                 <ul class="header_menu_list">

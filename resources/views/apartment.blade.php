@@ -1,9 +1,11 @@
 @extends('pattern')
 
 @section('content')
-    {{$apartment_data->id}}
-    {{$aprtment_data->address}}
+    {{$apartment_data->address}}
     @foreach($apartment_photos as $photo)
-    {{$photo->photo_url}}
+        {{$photo->photo_url}}
+    @endforeach
+    @foreach($similar_apartments as $similar_apartment)
+        {{$similar_apartment->address}}
     @endforeach
 @endsection
