@@ -47,13 +47,15 @@ class ApartmentPageController extends Controller
     public function show($id)
     {
         $apartment_data = \DB::table('apartments')
-            ->select('apartments.*')
+            ->select('id', 'address', 'town', 'district', 'price1-2 as price1', 'price3-9 as price2', 'price10-29 as price3', 'price30', 'rooms', 'places', 'facilities', 'description')
             ->where('id','=',$id)
             ->first();
+        $apartment_data_facilities = json_decode($apartment_data->facilities);
 
         $apartment_photos = \DB::table('apartment_photos')
             ->select('apartment_photos.photo_url')
             ->where('id_apartment','=',$id)
+            ->orderBy('apartment_photos.sort','desc')
             ->get();
 
         $similar_apartments = \DB::table('apartments')
@@ -70,7 +72,7 @@ class ApartmentPageController extends Controller
             ->limit(3)
             ->get();
 
-        return view('apartment', ['apartment_data' => $apartment_data, 'apartment_photos' => $apartment_photos, 'similar_apartments'=>$similar_apartments]);
+        return view('apartment', ['apartment_data' => $apartment_data, 'apartment_data_facilities'=>$apartment_data_facilities, 'apartment_photos' => $apartment_photos, 'similar_apartments'=>$similar_apartments]);
     }
 
     /**
