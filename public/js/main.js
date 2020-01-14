@@ -14,3 +14,11 @@ window.onresize = function(){
         object.style.display = 'none';
     }
 }
+
+$(function() {
+    $(".owl-carousel").owlCarousel();
+});
+$(".owl-carousel").owlCarousel({
+    loop:true,
+});
+

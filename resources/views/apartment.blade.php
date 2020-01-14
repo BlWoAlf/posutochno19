@@ -11,7 +11,19 @@
         </div>
         <div class="main-picture-container-picture"><img src="@if($apartment_photos->count() > 0) {{asset('users_pictures/'.$apartment_photos->first()->photo_url)}} @endif"></div>
     </div>
-    <div class="container more-pictures-container"></div>
+    <div class="container more-pictures-container ">
+        <div class="navigate-button-box left-navigate-button-box owl-nav">
+            <button type="button" role="presentation" class="owl-prev"><span aria-label="Previous">‹</span></button>
+        </div>
+        <div class="more-pictures-container-box owl-carousel">
+            @foreach($apartment_photos as $apartment_photo)
+                <div><img src="{{asset('users_pictures/'.$apartment_photo->photo_url)}}"></div>
+            @endforeach
+        </div>
+        <div class="navigate-button-box left-navigate-button-box owl-nav">
+            <button type="button" role="presentation" class="owl-next"><span aria-label="Next">›</span></button>
+        </div>
+    </div>
     <div class="container properties-container">
         <div class="row properties-container-listbox">
             <div class="col-sm-12 col-md-6">

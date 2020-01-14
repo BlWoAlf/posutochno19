@@ -9,9 +9,13 @@
     <link rel="stylesheet" href="{{asset('css/solid.css')}}">
     <link rel="stylesheet" href="{{asset('css/regular.css')}}">
     <link rel="stylesheet" href="{{asset('css/fontawesome.css')}}">
+    <link rel="stylesheet" href="{{asset('css/owl.carousel.css')}}">
+    <link rel="stylesheet" href="{{asset('css/owl.theme.default.css')}}">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="stylesheet" href="{{asset('css/dynamic_content.css')}}">
     <link rel="stylesheet" href="{{asset('css/media.css')}}">
+    <script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="{{asset('js/owl.carousel.js')}}"></script>
 </head>
 <body>
 <header class="header">
@@ -127,6 +131,6 @@
         </div>
     </div>
 </footer>
-<script src="../js/main.js"></script>
+<script src="{{asset('js/main.js')}}"></script>
 </body>
 </html>
