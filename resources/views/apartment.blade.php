@@ -9,19 +9,13 @@
             <div class="main-picture-container-header-district-price">{{$apartment_data->price1}} руб.</div>
             </div>
         </div>
-        <div class="main-picture-container-picture"><img src="@if($apartment_photos->count() > 0) {{asset('users_pictures/'.$apartment_photos->first()->photo_url)}} @endif"></div>
+        <div class="main-picture-container-picture"><img id="main-picture" src="@if($apartment_photos->count() > 0) {{asset('users_pictures/'.$apartment_photos->first()->photo_url)}} @endif"></div>
     </div>
     <div class="container more-pictures-container ">
-        <div class="navigate-button-box left-navigate-button-box owl-nav">
-            <button type="button" role="presentation" class="owl-prev"><span aria-label="Previous">‹</span></button>
-        </div>
         <div class="more-pictures-container-box owl-carousel">
             @foreach($apartment_photos as $apartment_photo)
-                <div><img src="{{asset('users_pictures/'.$apartment_photo->photo_url)}}"></div>
+                <img class="mini-picture" src="{{asset('users_pictures/'.$apartment_photo->photo_url)}}">
             @endforeach
-        </div>
-        <div class="navigate-button-box left-navigate-button-box owl-nav">
-            <button type="button" role="presentation" class="owl-next"><span aria-label="Next">›</span></button>
         </div>
     </div>
     <div class="container properties-container">
@@ -46,11 +40,11 @@
         </div>        
     </div>
     <div class="container description-container">
-        <div class="description-container-head apartment-page-head">Описание</div>
+        <div class="description-container-head apartment_page-head">Описание</div>
         <div class="description-container-body">{{$apartment_data->description}}</div>
     </div>
     <div class="container facilities-container">
-        <div class="facilities-container-head apartment-page-head">Удобства</div>
+        <div class="facilities-container-head apartment_page-head">Удобства</div>
         <div class="row facilities-container-listbox">
             <div class="col-sm-12 col-md-6">
                 <ul>
@@ -72,7 +66,7 @@
     </div>
     <div class="container location-container"></div>
     <div class="container similar_apartments-container">
-        <div class="similar_apartments-container-head apartment-page-head">Похожие квартиры</div>
+        <div class="similar_apartments-container-head apartment_page-head">Похожие квартиры</div>
         <div class="row">        
         </div>
     </div>

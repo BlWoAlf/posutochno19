@@ -15,10 +15,18 @@ window.onresize = function(){
     }
 }
 
+$('.more-pictures-container-box').on('click', '.mini-picture', function(){
+    $("#main-picture").attr("src",$(this).attr("src"));
+});
+
 $(function() {
     $(".owl-carousel").owlCarousel();
 });
 $(".owl-carousel").owlCarousel({
     loop:true,
+    nav: true,
+    items: 6,
+    margin: 30,
+    navText: ["<i class=\"fas fa-angle-left\"></i>","<i class=\"fas fa-angle-right\"></i>"],
 });
 
