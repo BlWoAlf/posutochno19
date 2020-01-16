@@ -1,5 +1,9 @@
 @extends('pattern')
 
+@section('title')
+    <title>ЧерногорскСутки.ру — Квартиры посуточно | в Черногорске</title>
+@endsection
+
 @section('content')
     <div class="container main_content">
         <div class="main_content_header">Квартиры на сутки в Черногорске</div>
@@ -10,6 +14,11 @@
                         <div class="main_content_image">
                             <a href="{{url('apartment/'.$item->id)}}">
                                 <img src="{{asset('users_pictures/'.$item->photo)}}">
+                                <div class="main_content_image_background">
+                                    <div class="main_content_image_background_circle">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                </div>
                                 <div class="main_content_image_price">{{$item->price}} руб.</div>
                             </a>
                         </div>

@@ -1,5 +1,8 @@
 @extends('pattern')
 
+@section('title')
+    <title>Способы оплаты — ЧерногорскСутки.ру</title>
+@endsection
 @section('content')
     <div class="container entry-container">
         <article id="post-617" class="post-617 page type-page status-publish hentry">

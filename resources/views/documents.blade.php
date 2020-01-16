@@ -1,5 +1,8 @@
 @extends('pattern')
 
+@section('title')
+    <title>Отчёты  и документы — ЧерногорскСутки.ру</title>
+@endsection
 @section('content')
     <div class="container entry-container">
         <article id="post-614" class="post-614 page type-page status-publish hentry">

@@ -1,5 +1,8 @@
 @extends('pattern')
 
+@section('title')
+    <title>Правила проживания — ЧерногорскСутки.ру</title>
+@endsection
 @section('content')
     <div class="container entry-container">
     <header class="entry-header page-header">

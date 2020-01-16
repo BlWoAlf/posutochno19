@@ -1,5 +1,9 @@
 @extends('pattern')
 
+@section('title')
+    <title>{{$apartment_data->address}} — ЧерногорскСутки.ру</title>
+@endsection
+
 @section('content')
     <div class="container main-picture-container">
         <div class="main-picture-container-header">
@@ -67,7 +71,37 @@
     <div class="container location-container"></div>
     <div class="container similar_apartments-container">
         <div class="similar_apartments-container-head apartment_page-head">Похожие квартиры</div>
-        <div class="row">        
+        <div class="row">
+            @foreach($similar_apartments as $item)
+                <div class="col-sm-12 col-md-6 col-lg-4 main_content_col_box">
+                    <div class="main_content_box">
+                        <div class="main_content_image">
+                            <a href="{{url('apartment/'.$item->id)}}">
+                                <img src="{{asset('users_pictures/'.$item->photo)}}">
+                                <div class="main_content_image_background">
+                                    <div class="main_content_image_background_circle">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                </div>
+                                <div class="main_content_image_price">{{$item->price}} руб.</div>
+                            </a>
+                        </div>
+                        <div class="main_content_maininfo">
+                            <div class="main_content_maininfo_address">
+                                <a href="{{url('apartment/'.$item->id)}}">{{$item->address}}</a>
+                            </div>
+                            <div class="main_content_maininfo_r_and_p">
+                                <div class="main_content_maininfo_r_and_p_rooms">
+                                    <i class="fas fa-th-large"></i> <span>Комнат: {{$item->rooms}}</span>
+                                </div>
+                                <div class="main_content_maininfo_r_and_p_places">
+                                    <i class="fas fa-bed"></i> <span>{{$item->places}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
 @endsection

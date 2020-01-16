@@ -25,7 +25,23 @@ $(function() {
 $(".owl-carousel").owlCarousel({
     loop:true,
     nav: true,
-    items: 6,
+    responsive:{
+        1200:{
+            items: 6
+        },
+        900:{
+            items: 5
+        },
+        768:{
+            items: 4
+        },
+        480:{
+            items: 3
+        },
+        0:{
+            items: 2
+        }
+    },
     margin: 30,
     navText: ["<i class=\"fas fa-angle-left\"></i>","<i class=\"fas fa-angle-right\"></i>"],
 });
