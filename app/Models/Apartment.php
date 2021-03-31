@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Apartment extends Model
 {
-    //
     public $timestamps = false;
+
+    // public function addNewApartment($data){}
 }

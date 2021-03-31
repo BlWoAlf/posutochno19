@@ -47,7 +47,7 @@ class ApartmentPageController extends Controller
     public function show($id)
     {
         $apartment_data = \DB::table('apartments')
-            ->select('id', 'address', 'town', 'district', 'price1-2 as price1', 'price3-9 as price2', 'price10-29 as price3', 'price30', 'rooms', 'places', 'facilities', 'description')
+            ->select('id', 'address', 'town', 'district', 'price1_2 as price1', 'price3-9 as price2', 'price10-29 as price3', 'price30', 'rooms', 'places', 'facilities', 'description')
             ->where('id','=',$id)
             ->first();
         $apartment_data_facilities = json_decode($apartment_data->facilities);

@@ -7,6 +7,7 @@
 @section('content')
     <div class="container main_content">
         <div class="main_content_header">Квартиры на сутки в Черногорске</div>
+        @yield('create-button')
         <div class="row">
             @foreach($items as $item)
                 <div class="col-sm-12 col-md-6 col-lg-4 main_content_col_box">
@@ -34,11 +35,15 @@
                                     <i class="fas fa-bed"></i> <span>{{$item->places}}</span>
                                 </div>
                             </div>
+                            @if(route('dashboard')==url()->current())
+                                @include('layouts.edit-button', ['id' => $item->id])
+                            @endif
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
+        @yield('create-button')
     </div>
     <div class="container static_content">
         <div class="map"></div>

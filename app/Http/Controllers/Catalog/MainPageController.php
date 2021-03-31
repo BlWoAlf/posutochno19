@@ -15,7 +15,7 @@ class MainPageController extends Controller
     public function index()
     {
         $items = \DB::table('apartments')
-            ->select(\DB::raw('`apartments`.`id`, `apartments`.`address`, `apartments`.`price1-2` as "price", `apartments`.`rooms`, `apartments`.`places`, (
+            ->select(\DB::raw('`apartments`.`id`, `apartments`.`address`, `apartments`.`price1_2` as "price", `apartments`.`rooms`, `apartments`.`places`, (
     SELECT `apartment_photos`.`photo_url`
     FROM `apartment_photos`
     WHERE `apartment_photos`.`id_apartment` = `apartments`.`id`
