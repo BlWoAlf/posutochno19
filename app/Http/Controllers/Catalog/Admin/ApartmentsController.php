@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\ApartmentPhoto;
+use App\Models\Form;
 
 class ApartmentsController extends Controller
 {
@@ -36,7 +37,9 @@ class ApartmentsController extends Controller
      */
     public function create()
     {
+        $form = Form::$inputs;
 
+        return view('admin/edit-page', ['form' => $form]);
     }
 
     /**
@@ -47,18 +50,11 @@ class ApartmentsController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
         $input = $request->except(['_token','_method','save','photo']);
 
-        $values = [];
+        // $input['facilities'] = collectFacilities($input['apartment']);
 
-        foreach($input as $key => $value){
-            if($value!=null){
-                $values[$key] = $value;
-            }
-        }
-
-        $id = Apartment::insertGetId($values);
+        $id = Apartment::insertGetId($input['apartment']);
 
         $photos = $request->input('photo');
 
@@ -80,11 +76,15 @@ class ApartmentsController extends Controller
         $apartment = Apartment::where('id', '=', $id)
         ->first();
 
+        $apartFull = Apartment::addFacilities($apartment);
+
         $apartment_photos = ApartmentPhoto::where('id_apartment', '=', $id)
         ->orderBy('sort','desc')
         ->get();
 
-        return view('admin/edit-page', ['apartment' => $apartment, 'apartment_photos' => $apartment_photos]);
+        $form = Form::$inputs;
+
+        return view('admin/edit-page', ['apartment' => $apartFull, 'apartment_photos' => $apartment_photos, 'form' => $form]);
     }
 
     /**
@@ -107,7 +107,6 @@ class ApartmentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $input = $request->all();
         $input = $request->except(['_token','_method','save', 'photo']);
 
         $photos = $request->input('photo');
@@ -117,9 +116,8 @@ class ApartmentsController extends Controller
         $this->addPhotos($photos, $id, $files);
         
         Apartment::where('id', $id)
-        ->update(
-            $input
-        );
+        ->update($input['apartment']);
+
         return redirect('admin');
     }
 

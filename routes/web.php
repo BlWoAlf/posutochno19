@@ -20,7 +20,7 @@ Route::group(
         Route::get('/',['as' => 'dashboard','uses' => 'ApartmentsController@index']);
         Route::get('edit-apartment/{id}',['as' => 'edit','uses' => 'ApartmentsController@show']);
         Route::put('save-edit/{id}', ['as' => 'save-edit', 'uses' => 'ApartmentsController@update']);
-        Route::get('create-apartment',['as' => 'create', function(){return view('admin\edit-page');}]);
+        Route::get('create-apartment',['as' => 'create', 'uses' => 'ApartmentsController@create']);
         Route::post('save-create',['as' => 'save-create','uses' => 'ApartmentsController@store']);
         Route::delete('delete-apartment/{id}',['as' => 'delete', 'uses' => 'ApartmentsController@destroy']);
     }
