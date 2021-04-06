@@ -17,16 +17,16 @@ class Form extends Model
         ['name' => 'rooms', 'type' => 'text'],
         ['name' => 'places', 'type' => 'text'],
         ['name' => 'description', 'type' => 'textarea'],
-        // ['name' => 'elevator', 'type' => 'checkbox'],
-        // ['name' => 'balcony', 'type' => 'checkbox'],
-        // ['name' => 'floor', 'type' => 'text'],
-        // ['name' => 'wifi', 'type' => 'checkbox'],
-        // ['name' => 'parking', 'type' => 'checkbox'],
-        // ['name' => 'washer', 'type' => 'checkbox'],
-        // ['name' => 'iron', 'type' => 'checkbox'],
-        // ['name' => 'furniture', 'type' => 'checkbox'],
-        // ['name' => 'microwave', 'type' => 'checkbox'],
-        // ['name' => 'tv', 'type' => 'checkbox'],
-        // ['name' => 'hairdryer', 'type' => 'checkbox']
+        ['name' => 'elevator', 'type' => 'checkbox', 'option' => true, 'optionPrefix' => 'facilities'],
+        ['name' => 'balcony', 'type' => 'checkbox', 'option' => true, 'optionPrefix' => 'facilities'],
+        ['name' => 'floor', 'type' => 'text', 'option' => true, 'optionPrefix' => 'facilities'],
+        ['name' => 'wifi', 'type' => 'checkbox', 'option' => true, 'optionPrefix' => 'facilities'],
+        ['name' => 'parking', 'type' => 'checkbox', 'option' => true, 'optionPrefix' => 'facilities'],
+        ['name' => 'washer', 'type' => 'checkbox', 'option' => true, 'optionPrefix' => 'facilities'],
+        ['name' => 'iron', 'type' => 'checkbox', 'option' => true, 'optionPrefix' => 'facilities'],
+        ['name' => 'furniture', 'type' => 'checkbox', 'option' => true, 'optionPrefix' => 'facilities'],
+        ['name' => 'microwave', 'type' => 'checkbox', 'option' => true, 'optionPrefix' => 'facilities'],
+        ['name' => 'tv', 'type' => 'checkbox', 'option' => true, 'optionPrefix' => 'facilities'],
+        ['name' => 'hairdryer', 'type' => 'checkbox', 'option' => true, 'optionPrefix' => 'facilities']
     ];
 }

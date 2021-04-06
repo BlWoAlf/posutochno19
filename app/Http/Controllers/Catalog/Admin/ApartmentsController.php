@@ -50,17 +50,15 @@ class ApartmentsController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->except(['_token','_method','save','photo']);
-
-        // $input['facilities'] = collectFacilities($input['apartment']);
-
-        $id = Apartment::insertGetId($input['apartment']);
+        $input = $request->input('apartment');
+        
+        $apartment = Apartment::create($input);
 
         $photos = $request->input('photo');
 
         $files = $request->file('photo');
 
-        $this->addPhotos($photos, $id, $files);
+        $this->addPhotos($photos, $apartment->id, $files);
 
         return redirect('admin');
     }
@@ -107,16 +105,12 @@ class ApartmentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $input = $request->except(['_token','_method','save', 'photo']);
+        $input = $request->except('apartment');
 
-        $photos = $request->input('photo');
-
-        $files = $request->file('photo');
-
-        $this->addPhotos($photos, $id, $files);
+        $this->addPhotos($id);
         
-        Apartment::where('id', $id)
-        ->update($input['apartment']);
+        $apartment = Apartment::where('id', $id)->first();
+        $apartment->fill($input)->save();
 
         return redirect('admin');
     }
@@ -134,7 +128,7 @@ class ApartmentsController extends Controller
 
         if($photos){
             foreach($photos as $photo){
-                if(Storage::get('public/users_pictures/'.$photo->photo_url)){
+                if(Storage::exists('public/users_pictures/'.$photo->photo_url)){
                     Storage::delete('public/users_pictures/'.$photo->photo_url);
                 }
             }
@@ -145,31 +139,29 @@ class ApartmentsController extends Controller
         return redirect('admin');
     }
 
-    private function addPhotos($photos, $apId, $files){
+    private function addPhotos($apId){
+
+        $photosExists = request()->input('photo');
+
+        $files = request()->file('photo');
         
         $getPhotos = ApartmentPhoto::where('id_apartment',$apId)->select('photo_url');
 
         $photosBefore = $getPhotos->get();
 
-        ApartmentPhoto::where('id_apartment',$apId)->delete();
+        ApartmentPhoto::where('id_apartment',$apId)->whereNotIn('photo_url', $photosExists)->delete();
         
         if($files!=null){
             foreach($files as $file){
-                $path = $file->store('public/users_pictures');
-                $photos[] = explode("/", $path)[2];
-            }
-        }
-
-        if($photos!=null){
-            foreach($photos as $photo){
-                if($photo != null){
-                    ApartmentPhoto::insert(
-                        [
-                            'id_apartment' => $apId,
-                            'photo_url' => $photo
-                        ]
-                    );
-                }
+                // $path = $file->store('public/users_pictures');
+                $pathPhoto = Storage::putFile('users_pictures', $file);
+                $photos[] = $path;
+                ApartmentPhoto::insert(
+                    [
+                        'id_apartment' => $apId,
+                        'photo_url' => $pathPhoto
+                    ]
+                );
             }
         }
 
@@ -181,7 +173,7 @@ class ApartmentsController extends Controller
         $difArray = array_diff($bfPhotos, $afPhotos);
         
         foreach($difArray as $dif){
-            if(Storage::get('public/users_pictures/'.$dif)){
+            if(Storage::exists('public/users_pictures/'.$dif)){
                 Storage::delete('public/users_pictures/'.$dif);
             }
         }

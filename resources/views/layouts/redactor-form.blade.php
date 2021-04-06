@@ -8,21 +8,26 @@
     @php
         $name = $item['name'];
         $type = $item['type'];
+        $option = false;
+        if(isset($item['option'])){
+            $option = $item['option'];
+            $optionPrefix = $item['optionPrefix'];
+        }
     @endphp
         @if($type == 'text')
         <label>
-            {{$name}}: <input type="{{$type}}" name="apartment[{{$name}}]"@if(isset($apartment->$name)) value="{{$apartment->$name}}" @endif>
+            {{$name}}: <input type="{{$type}}" @if($option) name="apartment[{{$optionPrefix}}][{{$name}}]"@else name="apartment[{{$name}}]" @endif @if(isset($apartment->$name)) value="{{$apartment->$name}}" @endif>
         </label>
         <br>
         @elseif($type == 'textarea')
         <label>
-            {{$name}}: <textarea name="apartment[{{$name}}]">@if(isset($apartment->$name)) {{$apartment->$name}} @endif</textarea>
+            {{$name}}: <textarea @if($option) name="apartment[{{$optionPrefix}}][{{$name}}]"@else name="apartment[{{$name}}]" @endif>@if(isset($apartment->$name)) {{$apartment->$name}} @endif</textarea>
         </label>
         <br>
         @elseif($type == 'checkbox')
         <label>
-            <input name="apartment[{{$name}}]" type="hidden" value="0">
-            {{$name}}: <input name="apartment[{{$name}}]" type="{{$type}}" value="1" @if(isset($apartment->$name) && $apartment->$name == 1) checked @endif>
+            <input @if($option) name="apartment[{{$optionPrefix}}][{{$name}}]"@else name="apartment[{{$name}}]" @endif type="hidden" value="0">
+            {{$name}}: <input @if($option) name="apartment[{{$optionPrefix}}][{{$name}}]"@else name="apartment[{{$name}}]" @endif type="{{$type}}" value="1" @if(isset($apartment->$name) && $apartment->$name == 1) checked @endif>
         </label>
         <br>
         @endif
