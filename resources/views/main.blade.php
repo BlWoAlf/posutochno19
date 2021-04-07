@@ -14,13 +14,15 @@
                     <div class="main_content_box">
                         <div class="main_content_image">
                             <a href="{{url('apartment/'.$item->id)}}">
-                                <img src="{{asset('users_pictures/'.$item->photo)}}">
+                                @if(isset($item->mainPhoto[0]['photo_url']))
+                                <img src="{{asset('storage/'.$item->mainPhoto[0]['photo_url'])}}">
+                                @endif
                                 <div class="main_content_image_background">
                                     <div class="main_content_image_background_circle">
                                         <i class="fas fa-search"></i>
                                     </div>
                                 </div>
-                                <div class="main_content_image_price">{{$item->price}} руб.</div>
+                                <div class="main_content_image_price">{{$item->price1_2}} руб.</div>
                             </a>
                         </div>
                         <div class="main_content_maininfo">

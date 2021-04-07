@@ -8,26 +8,36 @@
     @php
         $name = $item['name'];
         $type = $item['type'];
-        $option = false;
-        if(isset($item['option'])){
-            $option = $item['option'];
-            $optionPrefix = $item['optionPrefix'];
+        $propName = $item['propertyName'];
+        $value = null;
+
+        if(isset($apartment->$propName)){
+            if(isset($item['prop'])){
+                $value = $apartment->$propName[$item['prop']];               
+            }
+            else{
+                $value = $apartment->$propName;
+            }
+        }
+
+        if(isset($item['prop'])){
+            $propName = $item['prop'];
         }
     @endphp
         @if($type == 'text')
         <label>
-            {{$name}}: <input type="{{$type}}" @if($option) name="apartment[{{$optionPrefix}}][{{$name}}]"@else name="apartment[{{$name}}]" @endif @if(isset($apartment->$name)) value="{{$apartment->$name}}" @endif>
+            {{$propName}}: <input type="{{$type}}" name="{{$name}}" value="{{$value}}">
         </label>
         <br>
         @elseif($type == 'textarea')
         <label>
-            {{$name}}: <textarea @if($option) name="apartment[{{$optionPrefix}}][{{$name}}]"@else name="apartment[{{$name}}]" @endif>@if(isset($apartment->$name)) {{$apartment->$name}} @endif</textarea>
+            {{$propName}}: <textarea name="{{$name}}">{{$value}}</textarea>
         </label>
         <br>
         @elseif($type == 'checkbox')
         <label>
-            <input @if($option) name="apartment[{{$optionPrefix}}][{{$name}}]"@else name="apartment[{{$name}}]" @endif type="hidden" value="0">
-            {{$name}}: <input @if($option) name="apartment[{{$optionPrefix}}][{{$name}}]"@else name="apartment[{{$name}}]" @endif type="{{$type}}" value="1" @if(isset($apartment->$name) && $apartment->$name == 1) checked @endif>
+            <input name="{{$name}}" type="hidden" value="0">
+            {{$propName}}: <input name="{{$name}}" type="{{$type}}" value="1" @if($value == 1) checked @endif>
         </label>
         <br>
         @endif

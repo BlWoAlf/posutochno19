@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Apartment extends Model
 {
@@ -23,37 +24,39 @@ class Apartment extends Model
     protected $casts = [
         'facilities' => 'array'
     ];
-    // protected $guarded = self::$facilityFields;
+
+
     public $timestamps = false;
 
-    // public static $facilityFields = [
-    //     'elevator',
-    //     'balcony',
-    //     'floor',
-    //     'wifi',
-    //     'parking',
-    //     'washer',
-    //     'iron',
-    //     'furniture',
-    //     'microwave',
-    //     'tv',
-    //     'hairdryer'
-    // ];
-
-    public static function addFacilities($object){
-        if($object->facilities != null){
-            foreach ($object->facilities as $key => $value) {
-                $object->$key = $value;
-            }
-        }
-        return $object;
+    public function photos(){
+        return $this->hasMany('App\Models\ApartmentPhoto', 'id_apartment');
+    }
+    public function mainPhoto(){
+        return $this->hasMany('App\Models\ApartmentPhoto', 'id_apartment')->orderBy('sort','desc');
     }
 
-    // public static function collectFacilities($array){
-    //     $facilities = [];
-    //     foreach(self::$facilityFields as $item){
-    //         $facilities[$item] = $array[$item];
-    //     }
-    //     return $facilities;
-    // }
+    public function addPhotos(){
+
+        $photosExists = request()->input('photo') ? request()->input('photo') : [];
+
+        $files = request()->file('photo');
+
+        $apartmentPhoto = ApartmentPhoto::where('id_apartment',$this->id)->whereNotIn('photo_url', $photosExists)->get();
+
+        foreach($apartmentPhoto as $photo){
+            $photo->delete();
+        }
+        
+        if($files!=null){
+            foreach($files as $file){
+                $pathPhoto = Storage::putFile('users_pictures', $file);
+                ApartmentPhoto::insert(
+                    [
+                        'id_apartment' => $this->id,
+                        'photo_url' => $pathPhoto
+                    ]
+                );
+            }
+        }
+    }
 }

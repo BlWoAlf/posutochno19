@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Catalog;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Apartment;
+use App\Models\ApartmentPhoto;
 
 class MainPageController extends Controller
 {
@@ -14,16 +16,7 @@ class MainPageController extends Controller
      */
     public function index()
     {
-        $items = \DB::table('apartments')
-            ->select(\DB::raw('`apartments`.`id`, `apartments`.`address`, `apartments`.`price1_2` as "price", `apartments`.`rooms`, `apartments`.`places`, (
-    SELECT `apartment_photos`.`photo_url`
-    FROM `apartment_photos`
-    WHERE `apartment_photos`.`id_apartment` = `apartments`.`id`
-    ORDER BY `apartment_photos`.`sort` DESC
-    LIMIT 1
-) as "photo"
-'))
-            ->get();
+        $items = Apartment::get();
 
         return view('main', compact('items'));
     }
