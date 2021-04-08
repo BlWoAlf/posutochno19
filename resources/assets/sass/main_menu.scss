@@ -1,0 +1,35 @@
+.header_site_menu{
+    .header_menu_list{
+        height: 64px;
+        padding: 0px;
+        display: flex;
+        flex-direction: row;
+
+        li{
+            display: block;
+            list-style: none;
+            height: 100%;
+
+            a{
+                text-decoration: none;
+                display: block;
+                height: 100%;
+                width: 100%;
+                border-top: 2px solid transparent;
+                color: #fff;
+                font-size: 16px;
+                line-height: 16px;
+                font-weight: 300;
+                padding: 20px 25px;
+                white-space: nowrap;
+            }
+            a:hover{
+                background-color: #19271c;
+                border-top-color: $theme_second_color;
+            }
+            .current_page{
+                border-top-color: $theme_second_color;
+            }
+        }
+    }
+}

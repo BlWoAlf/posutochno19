@@ -1,0 +1,96 @@
+@import "footer_menu";
+
+footer{
+    padding-top: 50px;
+    padding-bottom: 60px;
+    background-color: $theme_color;
+}
+
+.widgettitle{
+   color: $theme_second_color;
+   font-size: 24px;
+   font-weight: 300;
+   margin-bottom: 45px;
+}
+.clearfix li, .menu-primary-container li, .textwidget dl, #identx a, .contacts_list li{
+   list-style-type: none;
+   color: #ffffff;
+}
+.clearfix li, #identx a{
+    font-weight: 300;
+}
+#identx{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#identx .identx{
+    text-decoration: none;
+}
+#identx span{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    white-space: nowrap;
+}
+#identx span a{
+    display: block;
+    font-size: 11px;
+    font-family: Arial Narrow, sans-serif;
+    height: 14px;
+    line-height: 1.6;
+    margin-right: 5px;
+}
+#identx .logo_identx a{
+    display: flex;
+    align-items: center;
+}
+#identx .logo_identx a .first{
+    margin-left: 4px;
+    font-family: Arial Narrow, sans-serif;
+    font-size: 16px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+.green_letter{
+    color: #41b359;
+   text-decoration: none;
+}
+.contacts_list a{
+   color: #767d77;
+   font-weight: 500;
+}
+.clearfix_list{
+   padding: 0;
+}
+.clearfix li{
+   display: block;
+   height: 42px;
+   padding-top: 8px;
+}
+.clearfix i{
+   font-size: 12px;
+   color: rgba(255, 255, 255, 0.3);
+   margin: 0 15px 0 0;
+}
+.menu-primary-container a{
+   text-decoration: none;
+   color: #ffffff;
+}
+
+.contacts_list{
+   display: flex;
+   flex-direction: column;
+   align-items: flex-end;
+}
+.contacts_list ul{
+   padding: 0px;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-end;
+}
+.contacts_list div{
+   color: #ffffff;
+}

@@ -1,0 +1,22 @@
+.mini_phone{
+    right: 30px;
+    bottom: 15px;
+    position: fixed;
+    display: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #33bd33;
+    z-index: 999;
+    cursor: pointer;
+    text-decoration: none;
+}
+.mini_phone i{
+    color: #fff;
+    font-size: 35px;
+    width: 60px;
+    line-height: 1.6;
+    text-align: center;
+    text-decoration: none;
+    /*display: block;*/
+}
