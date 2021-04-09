@@ -8,10 +8,11 @@
 // Bootstrap
 // @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
-@import "header";
-@import "footer";
-@import "phone_call";
+@import "header/header";
+@import "footer/footer";
+@import "phone-call/phone-call";
+@import "apartment-card/apartment-card";
 @import "main";
-@import "apartment";
+@import "apartment/apartment";
 @import "media";
 @import "special";
