@@ -2,17 +2,17 @@
 // Fonts
 // @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
-// Variables
-@import "variables";
-
 // Bootstrap
 // @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
-@import "header/header";
-@import "footer/footer";
-@import "phone-call/phone-call";
-@import "apartment-card/apartment-card";
-@import "main";
-@import "apartment/apartment";
-@import "media";
-@import "special";
+@import "utils/variables";
+@import "utils/special";
+
+@import "layout/header";
+@import "layout/footer";
+@import "layout/main";
+@import "layout/apartment";
+
+@import "components/phone-call";
+@import "components/apartment-card";
+@import "components/media";

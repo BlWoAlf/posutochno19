@@ -1,6 +1,6 @@
-@import "../logo/logo";
-@import "../main-menu/main-menu";
-@import "../mobile-menu/mobile-menu";
+@import "components/logo";
+@import "main-menu";
+@import "mobile-menu";
 
 .header_upper_content{
     display: flex;
