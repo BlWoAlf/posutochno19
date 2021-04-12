@@ -7,19 +7,22 @@
 @section('content')
     <div class="container main_content">
         <div class="main_content_header">Квартиры на сутки в Черногорске</div>
+        @yield('create-button')
         <div class="row">
             @foreach($items as $item)
                 <div class="col-sm-12 col-md-6 col-lg-4 main_content_col_box">
                     <div class="main_content_box">
                         <div class="main_content_image">
                             <a href="{{url('apartment/'.$item->id)}}">
-                                <img src="{{asset('users_pictures/'.$item->photo)}}">
+                                @if(isset($item->mainPhoto[0]['photo_url']))
+                                <img src="{{asset('storage/'.$item->mainPhoto[0]['photo_url'])}}">
+                                @endif
                                 <div class="main_content_image_background">
                                     <div class="main_content_image_background_circle">
                                         <i class="fas fa-search"></i>
                                     </div>
                                 </div>
-                                <div class="main_content_image_price">{{$item->price}} руб.</div>
+                                <div class="main_content_image_price">{{$item->price1_2}} руб.</div>
                             </a>
                         </div>
                         <div class="main_content_maininfo">
@@ -34,11 +37,15 @@
                                     <i class="fas fa-bed"></i> <span>{{$item->places}}</span>
                                 </div>
                             </div>
+                            @if(route('dashboard')==url()->current())
+                                @include('layouts.edit-button', ['id' => $item->id])
+                            @endif
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
+        @yield('create-button')
     </div>
     <div class="container static_content">
         <div class="map"></div>

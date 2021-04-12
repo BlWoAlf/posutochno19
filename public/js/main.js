@@ -20,6 +20,10 @@ $('.more-pictures-container-box').on('click', '.mini-picture', function(){
 });
 
 $(function() {
+    $('.delete-photo').click(function(){
+        $(this).parent().remove();
+    });
+
     $(".owl-carousel").owlCarousel();
 });
 $(".owl-carousel").owlCarousel({

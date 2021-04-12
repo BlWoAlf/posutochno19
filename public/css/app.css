@@ -371,6 +371,10 @@ footer{
     font-size: 14px;
 }
 
+.image_box{
+    width: 420px;
+    display: inline-block;
+}
 
 .entry-container{
     margin-bottom: 60px;
