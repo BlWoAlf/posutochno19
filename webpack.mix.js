@@ -24,6 +24,7 @@ mix.styles([
 ], 'public/css/tools.css');
 
 mix.scripts([
+   'public/js/app.js',
    'public/js/owl.carousel.js',
    'public/js/main.js'
 ], 'public/js/all.js');
