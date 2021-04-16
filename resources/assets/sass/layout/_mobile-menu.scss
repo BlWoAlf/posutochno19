@@ -1,0 +1,41 @@
+.mini_menu_button{
+    background-color: $theme_color;
+    height: 32px;
+    width: 40px;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    i{
+        color: #fff;
+        font-size: 20px;
+    }
+}
+
+.header_mini_menu_box{
+    display: none;
+    padding: 10px 0px 0px 20px;
+
+    .header_mini_menu{
+        list-style: none;
+        padding: 0;
+
+        li{
+            padding-top: 10px;
+            padding-bottom: 10px;
+            line-height: 20px;
+
+            a{
+                text-decoration: none;
+                color: #777;
+                font-family: 'Open Sans', 'Arial', sans-serif;
+                font-size: 14px;
+            }
+
+            a:hover{
+                color: #333;
+            }
+        }
+    }
+}

@@ -1,0 +1,127 @@
+.main-picture-container-header-address{
+    font-weight: 400;
+    font-size: 28px;
+    color: #3f4a41;
+    margin: 50px 0 20px 0;
+ }
+ .main-picture-container-header-district{
+    display: flex;
+    flex-direction: row;
+    margin: 0 0 30px 0;
+ }
+ .main-picture-container-header-district-address{
+    color: #3f4a41;
+    font-size: 16px;
+    margin-right: 20px;
+ }
+ .main-picture-container-header-district-price{
+    background-color: #3f4a41;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 6px 15px;
+    vertical-align: middle;
+    line-height: 1.1;
+ }
+ .main-picture-container-picture{
+    width: 100%;
+    max-height: 720px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin: 0 0 30px 0;
+ }
+ .main-picture-container-picture img{
+    max-height: 720px;
+    width: 100%;
+    object-fit: cover;
+ }
+ 
+ .more-pictures-container{
+    margin-bottom: 80px;
+ }
+ .owl-stage-outer{
+    margin: 0 0 20px 0;
+ }
+ .owl-item{
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+ }
+ .owl-nav{
+    display: flex;
+    justify-content: center;
+ }
+ .owl-carousel .owl-nav button.owl-prev, .owl-carousel .owl-nav button.owl-next{
+    width: 50px;
+    height: 50px;
+    margin: 0px 20px;
+    background-color: #fdaa1b;
+ }
+ .owl-nav i{
+    font-size: 30px;
+    color: #fff;
+ }
+ 
+ .properties-container{
+    padding: 0px 35px 0px 35px;
+    margin-bottom: 70px;
+ }
+ .properties-container-listbox{
+    background-color: whitesmoke;
+    margin: 0 0 30px 0;
+    padding: 12px 20px;
+ }
+ .properties-container-listbox ul, .facilities-container-listbox ul{
+    padding: 0px;
+    margin: 0px;
+    list-style-type: none;
+ }
+ .properties-container-listbox li, .facilities-container-listbox li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #707070;
+    font-family: 'Open Sans', 'Arial', sans-serif;
+    font-size: 14px;
+    line-height: 32px;
+    padding: 4px 0;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+ }
+ .properties-container-listbox li span:last-child{
+    color: #3f4a41;
+    font-weight: 600;
+ }
+ .description-container, .facilities-container, .location-container{
+    padding: 0px 35px;
+ }
+ .apartment_page-head{
+    font-size: 24px;
+    color: #3f4a41;
+    font-weight: 300;
+    margin: 5px 0 40px 0;
+ }
+ 
+ .description-container{
+    margin-bottom: 70px;
+ }
+ .description-container-body{
+    color: #707070;
+    font-family: 'Open Sans', 'Arial', sans-serif;
+    font-size: 14px;
+ }
+ .facilities-container{
+    margin-bottom: 70px;
+ }
+ .facilities-container .fa-check-circle{
+    color: #5cb85c;
+ }
+ .facilities-container .fa-times-circle{
+    color: #d9534f;
+ }
+ .similar_apartments-container{
+    margin-bottom: 80px;
+ }

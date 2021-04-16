@@ -1,9 +1,20 @@
 
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-
-// Variables
-@import "variables";
+// @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
 // Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+// @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+@import "vendors/bootstrap";
+
+@import "utils/variables";
+@import "utils/special";
+
+@import "layout/header";
+@import "layout/footer";
+@import "layout/main";
+@import "layout/apartment";
+
+@import "components/phone-call";
+@import "components/apartment-card";
+@import "components/media";

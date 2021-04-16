@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Catalog;
+namespace App\Http\Controllers\Catalog\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\ApartmentPhoto;
+use App\Models\Form;
 
-class MainPageController extends Controller
+class ApartmentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +18,9 @@ class MainPageController extends Controller
      */
     public function index()
     {
-        $items = Apartment::get();
+        $apartments = Apartment::get();
 
-        return view('main', compact('items'));
+        return view('admin\main', ['items' => $apartments]);
     }
 
     /**
@@ -28,7 +30,9 @@ class MainPageController extends Controller
      */
     public function create()
     {
-        //
+        $form = Form::$inputs;
+
+        return view('admin/edit-page', ['form' => $form]);
     }
 
     /**
@@ -39,7 +43,13 @@ class MainPageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->input('apartment');
+        
+        $apartment = Apartment::create($input);
+
+        $apartment->addPhotos();
+
+        return redirect('admin');
     }
 
     /**
@@ -50,7 +60,11 @@ class MainPageController extends Controller
      */
     public function show($id)
     {
-        //
+        $apartment = Apartment::find($id);
+
+        $form = Form::$inputs;
+
+        return view('admin/edit-page', ['apartment' =>  $apartment, 'form' => $form]);
     }
 
     /**
@@ -61,7 +75,7 @@ class MainPageController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -73,7 +87,15 @@ class MainPageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->input('apartment');
+        
+        $apartment = Apartment::find($id);
+
+        $apartment->fill($input)->save();
+
+        $apartment->addPhotos();
+
+        return redirect('admin');
     }
 
     /**
@@ -84,6 +106,13 @@ class MainPageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $apPhotos = ApartmentPhoto::where('id_apartment',$id)->get();
+        
+        foreach($apPhotos as $photo){
+            $photo->delete();
+        }
+
+        Apartment::where('id', '=', $id)->delete();
+        return redirect('admin');
     }
 }
