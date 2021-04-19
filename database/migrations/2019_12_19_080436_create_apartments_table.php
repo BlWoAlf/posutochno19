@@ -18,9 +18,9 @@ class CreateApartmentsTable extends Migration
             $table->string('address');
             $table->string('town');
             $table->string('district');
-            $table->integer('price1-2');
-            $table->integer('price3-9');
-            $table->integer('price10-29');
+            $table->integer('price1_2');
+            $table->integer('price3_9');
+            $table->integer('price10_29');
             $table->integer('price30');
             $table->integer('rooms');
             $table->string('places');

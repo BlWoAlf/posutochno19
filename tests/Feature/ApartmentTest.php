@@ -15,10 +15,17 @@ class ApartmentTest extends TestCase
      * @return void
      */
     public function testApartment(){
-        $apartment = factory('App\Apartment')->create();
+        $apartment = factory('App\Models\Apartment')->create();
 
         $response = $this->get('/admin/edit-apartment/'.$apartment->id);
 
-        $response->assertSee($apartment->address);
+        // $this->assertDatabaseHas('apartments', ['address' => $apartment->address]);
+
+        $response->assertStatus(200);
+        // $response->assertViewHasAll($apartment);
+        // $response->assertViewHas('id', $apartment->id);
+        $response->assertViewHas('apartment', $apartment);
+
+        // $response->assertSee($apartment->address);
     }
 }
