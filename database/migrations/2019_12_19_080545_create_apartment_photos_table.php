@@ -16,7 +16,7 @@ class CreateApartmentPhotosTable extends Migration
         Schema::create('apartment_photos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_apartment')->unsigned();
-            $table->string('photo_url');
+            $table->string('photo_url')->nullable();
             $table->integer('sort')->nullable();
 
             $table->foreign('id_apartment')->references('id')->on('apartments');
