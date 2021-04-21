@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
+use App\Models\Apartment;
 use App\Models\ApartmentPhoto;
 
 class ApartmentTest extends TestCase
@@ -50,7 +51,7 @@ class ApartmentTest extends TestCase
             "facilities" => [
                 "elevator" => "1",
                 "balcony" => "1",
-                "floor" => "4",
+                "floor" => "5",
                 "wifi" => "1",
                 "parking" => "1",
                 "washer" => "1",
@@ -66,8 +67,54 @@ class ApartmentTest extends TestCase
         $response = $this->put('/admin/save-edit/'.$apartment->id, $new_data);
 
         $this->assertDatabaseHas('apartments', [
-            "facilities" => "{\"elevator\":\"1\",\"balcony\":\"1\",\"floor\":\"4\",\"wifi\":\"1\",\"parking\":\"1\",\"washer\":\"1\",\"iron\":\"1\",\"furniture\":\"1\",\"microwave\":\"1\",\"tv\":\"1\",\"hairdryer\":\"1\"}"
+            "facilities" => "{\"elevator\":\"1\",\"balcony\":\"1\",\"floor\":\"5\",\"wifi\":\"1\",\"parking\":\"1\",\"washer\":\"1\",\"iron\":\"1\",\"furniture\":\"1\",\"microwave\":\"1\",\"tv\":\"1\",\"hairdryer\":\"1\"}"
         ]);
+    }
+    
+    public function testCreateApartment(){
+        $new_data = ['apartment' => [
+            "address" => "FFFffff",
+            "town" => "Faasdasd",
+            "district" => "reer",
+            "price1_2" => "556",
+            "price3_9" => "124",
+            "price10_29" => "123",
+            "price30" => "12",
+            "rooms" => "2",
+            "places" => "2+2",
+            "description" => "ABOBA",
+            "facilities" => [
+                "elevator" => "1",
+                "balcony" => "1",
+                "floor" => "5",
+                "wifi" => "1",
+                "parking" => "1",
+                "washer" => "1",
+                "iron" => "1",
+                "furniture" => "1",
+                "microwave" => "1",
+                "tv" => "1",
+                "hairdryer" => "1"
+                ]
+            ]
+        ];
+
+        $response = $this->post('/admin/save-create/', $new_data);
+
+        $this->assertDatabaseHas('apartments', [
+            "facilities" => "{\"elevator\":\"1\",\"balcony\":\"1\",\"floor\":\"5\",\"wifi\":\"1\",\"parking\":\"1\",\"washer\":\"1\",\"iron\":\"1\",\"furniture\":\"1\",\"microwave\":\"1\",\"tv\":\"1\",\"hairdryer\":\"1\"}"
+        ]);
+
+        $apartment = Apartment::first();
+        $this->assertEquals($new_data['apartment']['address'], $apartment->address);
+    }
+
+    public function testDeleteApartment(){
+        $apartment = factory('App\Models\Apartment')->create();
+
+        $response = $this->delete('admin/delete-apartment/'.$apartment->id);
+
+        $this->assertDatabaseMissing('apartments', ['id' => $apartment->id]);
     }
 
     public function testUpadateApartmentPhoto(){
@@ -76,18 +123,45 @@ class ApartmentTest extends TestCase
         $apartment = factory('App\Models\Apartment')->create();
         // $photos = factory('App\Models\ApartmentPhoto', 3)->make();
 
-        $photos = [];
+        $photoFiles = [];
         for($i = 1; $i <= 3; $i++){
-            $photos['photo'][] = $file = UploadedFile::fake()->image(uniqid() . '.jpg');
+            $photoFiles['photo'][] = $file = UploadedFile::fake()->image(uniqid() . '.jpg');
         }
 
-        $response = $this->put('/admin/save-edit/'.$apartment->id, $photos);
+        // request()->merge($photoFiles);
 
-        $photo = ApartmentPhoto::where('id_apartment', $apartment->id)->first();
+        $response = $this->put('admin/save-edit/'.$apartment->id, $photoFiles);
+        $apartment->addPhotos();
 
-        dd($photo);
+        $photo = ApartmentPhoto::where('id_apartment', $apartment->id)->get();
 
-        $this->assertDatabaseHas('apartment_photos', ['photo_url' => $photo->photo_url]);
-        // $this->assertEquals($photos['photo_url'][0], $photo->photo_url);
+        // dd($photo);
+
+        // $this->assertDatabaseHas('apartment_photos', ['photo_url' => $photo->photo_url]);
+        // $this->assertEquals($photos['photo'][0], $photo->photo_url);
+
+        $this->assertCount(3, $photo);
+    }
+    
+    public function testDeleteApartmentPhoto(){
+        Storage::fake('public');
+
+        $apartment = factory('App\Models\Apartment')->create();
+
+        $photoFiles = [];
+        for($i = 1; $i <= 2; $i++){
+            $photoFiles['photo'][] = $file = UploadedFile::fake()->image(uniqid() . '.jpg');
+        }
+
+        $response = $this->put('admin/save-edit/'.$apartment->id, $photoFiles);
+        $apartment->addPhotos();
+
+        $photo = ApartmentPhoto::where('id_apartment', $apartment->id)->get();
+        $this->assertCount(2, $photo);
+
+        $response = $this->delete('admin/delete-apartment/'.$apartment->id);
+
+        $photo = ApartmentPhoto::where('id_apartment', $apartment->id)->get();
+        $this->assertCount(0, $photo);
     }
 }
