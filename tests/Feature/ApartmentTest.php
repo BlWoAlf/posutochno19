@@ -117,7 +117,7 @@ class ApartmentTest extends TestCase
         $this->assertDatabaseMissing('apartments', ['id' => $apartment->id]);
     }
 
-    public function testUpadateApartmentPhoto(){
+    public function testAddNewApartmentPhoto(){
         Storage::fake('public');
 
         $apartment = factory('App\Models\Apartment')->create();
@@ -142,6 +142,26 @@ class ApartmentTest extends TestCase
 
         $this->assertCount(3, $photo);
     }
+
+    public function testUpdateApartmentPhoto(){
+        $apartment = factory('App\Models\Apartment')->create();
+        $photos = factory('App\Models\ApartmentPhoto', 3)->create();
+
+        $new_data = factory('App\Models\Apartment')->make();
+
+        $newPhotoFiles = [];
+        for($i = 1; $i <= 2; $i++){
+            $newPhotoFiles['photo'][] = $file = UploadedFile::fake()->image(uniqid() . '.jpg');
+        }
+
+        $response = $this->put('admin/save-edit/'.$apartment->id, $newPhotoFiles);
+        $apartment->addPhotos();
+
+        $photo = ApartmentPhoto::where('id_apartment', $apartment->id)->get();
+        
+        $this->assertCount(2, $photo);
+        $this->assertDatabaseMissing('apartment_photos', $photos->toArray());
+    }
     
     public function testDeleteApartmentPhoto(){
         Storage::fake('public');
@@ -155,9 +175,6 @@ class ApartmentTest extends TestCase
 
         $response = $this->put('admin/save-edit/'.$apartment->id, $photoFiles);
         $apartment->addPhotos();
-
-        $photo = ApartmentPhoto::where('id_apartment', $apartment->id)->get();
-        $this->assertCount(2, $photo);
 
         $response = $this->delete('admin/delete-apartment/'.$apartment->id);
 
