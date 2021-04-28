@@ -1,0 +1,30 @@
+# Codeception Test Suite Configuration
+#
+# Suite for acceptance tests.
+# Perform tests in browser using the WebDriver or PhpBrowser.
+# If you need both WebDriver and PHPBrowser tests - create a separate suite.
+
+actor: AcceptanceTester     
+modules:
+    # enabled:
+    #     - PhpBrowser:
+    #         url: http://nedvijka/
+    #     - \Helper\Acceptance
+    enabled:
+        - WebDriver:
+            url: http://nedvijka/
+            browser: chrome
+            window_size: false # disabled in ChromeDriver
+            port: 9515
+            capabilities:
+            chromeOptions:
+                args: ["--headless", "--disable-gpu"] # Run Chrome in headless mode
+                prefs:
+                    download.default_directory: "..."
+        - \Helper\Acceptance
+step_decorators: ~ 
+extensions:
+    enabled:
+        - Codeception\Extension\RunProcess:
+            0: chromedriver --url-base=/wd/hub
+            sleep: 1
